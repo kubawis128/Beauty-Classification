@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hello</title>
+    <script defer>
+        function post(rate) {
+            fetch("/data", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: rate + "," + document.getElementsByTagName("img")[0].className
+            }).then(res => {
+                console.log("Request complete! response:", res);
+                location.reload()
+            });
+            
+        }
+        const handleOnMouseMove = e => {
+            const {
+                currentTarget: target
+            } = e;
+            const rect = target.getBoundingClientRect(),
+                x = e.clientX - rect.left,
+                y = e.clientY - rect.top
+
+            target.style.setProperty("--mouse-x", `${x}px`)
+            target.style.setProperty("--mouse-y", `${y}px`)
+
+        }
+
+        function enable() {
+            for (const card of document.querySelectorAll("#card")) {
+                card.onmousemove = e => handleOnMouseMove(e);
+            }
+        }
+    </script>
+    <style>
+        body {
+            align-items: center;
+            justify-content: center;
+            background-color: #292e36;
+            height: 100vh;
+            width: 100%;
+            margin: 0px;
+            padding: 0px;
+
+        }
+
+        img {
+            height: 512;
+            width: 512;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 1%;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px #0f1013;
+        }
+
+        h1 {
+            color: rgb(240, 240, 240);
+            font-family: "Rubik", sans-serif;
+            font-weight: 400;
+            text-align: center;
+        }
+
+        button {
+            color: #22272e;
+        }
+
+        #cards {
+            display: flex;
+            gap: 8px;
+            justify-content: center;
+            margin-top: 2%;
+        }
+
+        #card {
+            /*background: radial-gradient(
+                800px circle at var(--mouse-x) var(--mouse-y),
+                rgba(255,255,255, 0.06),
+                transparent 40%
+            );*/
+            background-color: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+            height: 200px;
+            width: 200px;
+            border-radius: 10px;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 3px 3px 5px #1d2025;
+        }
+
+        #card:hover::before {
+            opacity: 1;
+        }
+
+        #card::before {
+            border-radius: inherit;
+            content: "";
+            height: 100%;
+            left: 0px;
+            opacity: 0;
+            position: absolute;
+            transition: opacity 500ms;
+            top: 0px;
+            width: 100%;
+            z-index: 2;
+        }
+
+        h2,
+        h3,
+        h4,
+        span {
+            color: rgb(240, 240, 240);
+            font-family: "Rubik", sans-serif;
+            font-weight: 400;
+            margin: 0px;
+            font-size: 1.1em;
+            text-align: center;
+            margin: auto;
+            margin-top: auto;
+            height: 400px;
+            line-height: 200px;
+            text-align: center;
+        }
+
+        .card-red::before {
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 13, 13, 0.12),
+                    transparent 40%);
+        }
+
+        .card-orange::before {
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 78, 17, 0.12),
+                    transparent 40%);
+        }
+
+        .card-dark-yellow::before {
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(255, 142, 21, 0.12),
+                    transparent 40%);
+        }
+
+        .card-yellow::before {
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(250, 183, 51, 0.12),
+                    transparent 40%);
+        }
+
+        .card-green::before {
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(105, 179, 76, 0.12),
+                    transparent 40%);
+        }
+    </style>
+</head>
+
+<body onload="enable();">
+    <h1>Oceń tą Morde</h1>
+    <img height="512" width="512" class="nazwapliku" src="https://thispersondoesnotexist.com/image"></img>
+    <div id="cards">
+        <div id="card" class="card-red" onclick="post(1)">
+            <h2>1</h2>
+        </div>
+        <div id="card" class="card-orange" onclick="post(2)">
+            <h2>2</h2>
+        </div>
+        <div id="card" class="card-dark-yellow" onclick="post(3)">
+            <h2>3</h2>
+        </div>
+        <div id="card" class="card-yellow" onclick="post(4)">
+            <h2>4</h2>
+        </div>
+        <div id="card" class="card-green" onclick="post(5)">
+            <h2>5</h2>
+        </div>
+    </div>
+
+</body>
+
+</html>

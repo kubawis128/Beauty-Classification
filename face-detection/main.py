@@ -23,7 +23,6 @@ with mp_face_detection.FaceDetection(
       mp_drawing.draw_detection(annotated_image, detection)
     cv2.imwrite('/tmp/annotated_image' + str(idx) + '.png', annotated_image)
 
-# For webcam input:
 cap = cv2.VideoCapture(0)
 with mp_face_detection.FaceDetection(
     model_selection=0, min_detection_confidence=0.5) as face_detection:
@@ -31,25 +30,12 @@ with mp_face_detection.FaceDetection(
     success, image = cap.read()
     if not success:
       print("Ignoring empty camera frame.")
-      # If loading a video, use 'break' instead of 'continue'.
       continue
-
-    # To improve performance, optionally mark the image as not writeable to
-    # pass by reference.
     image.flags.writeable = False
     image = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
     results = face_detection.process(image)
-
-    # Draw the face detection annotations on the image.
     image.flags.writeable = True
     image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
-    if results.detections:
-      for detection in results.detections:
-        #mp_drawing.draw_detection(image, detection)
-        y,x,k = image.shape
-        #bounding_box = results.detections[0].location_data.relative_bounding_box
-        #image = cv2.circle(image, (int(bounding_box.xmin*x)+int(bounding_box.width*x),int(bounding_box.ymin*y)), radius=10, color=(255, 0, 255), thickness=-1)
-    # Flip the image horizontally for a selfie-view display.
     cv2.imshow('MediaPipe Face Detection', cv2.flip(image, 1))
     k = cv2.waitKey(1)
     if k == ord('a'):

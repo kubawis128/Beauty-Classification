@@ -1,1 +1,1 @@
-# Kradniemy pomysły z kopernika
+# ~~Kradniemy pomysły z kopernika~~ Inspirujemy się Centrum Nauki Kopernik
