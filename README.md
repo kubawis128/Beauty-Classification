@@ -1,0 +1,1 @@
+# Kradniemy pomysły z kopernika
