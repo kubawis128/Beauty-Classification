@@ -1,3 +1,4 @@
-face-scrapper/face/*
-image-manual-classification/images/*
-image-manual-classification/out/*
+face-scrapper/face/
+image-manual-classification/images/
+image-manual-classification/out/
+*.png

@@ -19,7 +19,7 @@ http.createServer(function (req, res) {
         if (uzywane_pliki.includes(plik)){
           plik = pliki[Math.floor(Math.random()*pliki.length)];  
           if (uzywane_pliki.includes(plik)){
-            let ress = "" + fs.readFileSync("./end_of_images.html");
+            let ress = "" + fs.readFileSync("./websites/end_of_images.html");
             res.end(ress);
             return
           }
@@ -30,12 +30,12 @@ http.createServer(function (req, res) {
     uzywane_pliki.push(plik);
     try {
       let base64img = Buffer.from(fs.readFileSync("./images/" + plik)).toString('base64');
-      let ress = "" + fs.readFileSync("./index.html");
+      let ress = "" + fs.readFileSync("./websites/index.html");
       ress = ress.replace('https://thispersondoesnotexist.com/image',"data:image/png;base64," + base64img )
       ress = ress.replace('nazwapliku',plik)
       res.end(ress);
     } catch (error) {
-      let ress = "" + fs.readFileSync("./end_of_images.html");
+      let ress = "" + fs.readFileSync("./websites/end_of_images.html");
       res.end(ress);
       return
     }
