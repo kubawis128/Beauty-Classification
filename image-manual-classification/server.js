@@ -5,6 +5,7 @@ let pliki = [];
 let uzywane_pliki = [];
 let plik = ""
 
+console.log("Starting http server at *:3000")
 http.createServer(function (req, res) {
   if (req.method === "GET") {
     res.writeHead(200, {
@@ -16,6 +17,7 @@ http.createServer(function (req, res) {
     if (uzywane_pliki.includes(plik)){
       plik = pliki[Math.floor(Math.random()*pliki.length)];  
       if (uzywane_pliki.includes(plik)){
+        plik = pliki[Math.floor(Math.random()*pliki.length)];  
         if (uzywane_pliki.includes(plik)){
           plik = pliki[Math.floor(Math.random()*pliki.length)];  
           if (uzywane_pliki.includes(plik)){

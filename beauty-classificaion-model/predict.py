@@ -5,7 +5,6 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, models, utils
 import matplotlib.pyplot as plt
 import numpy as np
-from model import MobileNetV3LiteRASPP
 from tensorflow.keras.losses import categorical_crossentropy
 from tensorflow.keras.optimizers import Adam, RMSprop
 import tensorflow.keras as keras

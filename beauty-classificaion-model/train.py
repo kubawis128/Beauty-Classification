@@ -2,7 +2,6 @@ import tensorflow as tf
 from tensorflow.keras import datasets, layers, models, utils
 import matplotlib.pyplot as plt
 import numpy as np
-from model import MobileNetV3LiteRASPP
 from tensorflow.keras.losses import categorical_crossentropy
 from tensorflow.keras.optimizers import Adam, RMSprop
 
@@ -16,7 +15,7 @@ if gpus:
     print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
     print(e)
-gpus = tf.config.list_physical_devices('GPU')
+
 if gpus:
   try:
     tf.config.set_logical_device_configuration(
@@ -41,6 +40,7 @@ train_ds = tf.keras.utils.image_dataset_from_directory(
   seed=3412,
   image_size=(img_height, img_width),
   batch_size=batch_size)
+
 val_ds = tf.keras.utils.image_dataset_from_directory(
   data_dir,
   validation_split=0.1,
@@ -55,14 +55,26 @@ class_names = train_ds.class_names
 # 5
 num_classes = len(class_names)
 
-# to trzeba wymienić na MobileNetV3 bo narazie bieda
+data_augmentation = keras.Sequential(
+  [
+    layers.RandomFlip("horizontal",
+                      input_shape=(img_height,
+                                  img_width,
+                                  3)),
+    layers.RandomRotation(0.1),
+    layers.RandomZoom(0.1),
+  ]
+)
+
+# to trzeba wymienić na cos innego bo bieda
 model = tf.keras.Sequential([
+  data_augmentation,
   tf.keras.layers.Rescaling(1./255),
-  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.Conv2D(16, 3, activation='relu'),
   tf.keras.layers.MaxPooling2D(),
   tf.keras.layers.Conv2D(32, 3, activation='relu'),
   tf.keras.layers.MaxPooling2D(),
-  tf.keras.layers.Conv2D(32, 3, activation='relu'),
+  tf.keras.layers.Conv2D(64, 3, activation='relu'),
   tf.keras.layers.MaxPooling2D(),
   tf.keras.layers.Flatten(),
   tf.keras.layers.Dense(128, activation='relu'),
@@ -76,7 +88,7 @@ model.compile(
 
 # for statistics
 history = model.fit(train_ds, epochs=5, 
-                    validation_data=val_ds,batch_size = 8)
+                    validation_data=val_ds,batch_size = batch_size)
 
 acc = history.history['accuracy']
 val_acc = history.history['val_accuracy']
