@@ -1,3 +1,3 @@
 # Manualne klasyfikowanie danych
 ### W skrócie: `Niewolnicza praca`
-![prewiev](../images/Rating.png "Rating")
+![prewiev](../images/rating.png "Rating")
