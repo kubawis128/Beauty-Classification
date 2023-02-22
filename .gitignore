@@ -1,5 +1,4 @@
 face-scrapper/face/
-*.png
 beauty-classificaion-model/dataset/
 beauty-classificaion-model/test/
 beauty-classificaion-model/__pycache__/
