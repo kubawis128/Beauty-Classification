@@ -11,8 +11,14 @@ http.createServer(function (req, res) {
     res.writeHead(200, {
       "Content-Type": "text/html"
     });
-    
-    pliki = fs.readdirSync("./images/"); 
+    try{
+      pliki = fs.readdirSync("./images/"); 
+    }catch {
+      console.error("No source images")
+      let ress = "" + fs.readFileSync("./websites/end_of_images.html");
+      res.end(ress);
+      return
+    }
     plik = pliki[Math.floor(Math.random()*pliki.length)];  
     if (uzywane_pliki.includes(plik)){
       plik = pliki[Math.floor(Math.random()*pliki.length)];  
@@ -53,5 +59,4 @@ http.createServer(function (req, res) {
       res.end("e");
     });
   }
-
-}).listen(3000);
+}).listen(80);
