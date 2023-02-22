@@ -6,5 +6,5 @@
 - [ ] Use better model
 - [x] Use GPU (google Colab)
 
-![accuracy](../images/Accuracy "Training Accuracy (Basic 4-layer model ~250 training images)")
-![classification](../images/Accuracy "First Image Classification (Basic 4-layer model ~250 training images)")
+![accuracy](../images/Accuracy.png "Training Accuracy (Basic 4-layer model ~250 training images)")
+![classification](../images/Classification.png "First Image Classification (Basic 4-layer model ~250 training images)")
