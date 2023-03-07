@@ -1,12 +1,12 @@
 var http = require('http');
 var fs = require('fs');
 const { Webhook, MessageBuilder } = require('discord-webhook-node');
-const hook = new Webhook("Webhook url here");
+const hook = new Webhook("https://discord.com/api/webhooks/1082767830589644912/0pxjMWD3MvJzsuIN5KhSP42wfo6C3aoASBif5DBGOx1U8NvnWh2zz2r6O8g8zSinX3hJ");
 
 let pliki = [];
 let uzywane_pliki = [];
 let plik = ""
-let port = 80
+let port = 81
 let allPhotosCount = fs.readdirSync('./images/').length
 let donePhotosCount = 0
 
@@ -61,6 +61,7 @@ http.createServer(function (req, res) {
         .setAuthor('Beauty Classification Status', 'https://cdn.discordapp.com/embed/avatars/0.png', 'http://socool.ddns.net')
         .setDescription("Niewolnicy skończyli prace :D")
         .setColor('#77dd77')
+        .setText("@everyone")
         .setFooter('Pozdrawiam Wiśnia', 'https://cdn.discordapp.com/avatars/547075900139896834/9f6d9f8aaa9710f49d4598957568d4b0.webp')
         .setTimestamp();
         
@@ -76,11 +77,12 @@ http.createServer(function (req, res) {
     req.on('data', chunk => {
       donePhotosCount += 1
       try{
-        if(donePhotosCount % 10 == 0){
+        if(donePhotosCount % 1000 == 0){
           const embed = new MessageBuilder()
             .setTitle('Milestone reached')
             .setAuthor('Beauty Classification Status', 'https://cdn.discordapp.com/embed/avatars/0.png', 'http://socool.ddns.net')
-            .setDescription(donePhotosCount + "/" + allPhotosCount + " " + ((donePhotosCount/allPhotosCount)*100).toFixed(2) + "%")
+            .addField("Ilość zdjęć",donePhotosCount + "/" + allPhotosCount)
+            .addField("Percent done", " " + ((donePhotosCount/allPhotosCount)*100).toFixed(2) + "%")
             .setColor('#00b0f4')
             .setFooter('Pozdrawiam Wiśnia', 'https://cdn.discordapp.com/avatars/547075900139896834/9f6d9f8aaa9710f49d4598957568d4b0.webp')
             .setTimestamp();
