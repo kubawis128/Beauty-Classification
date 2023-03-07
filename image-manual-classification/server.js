@@ -4,8 +4,8 @@ var fs = require('fs');
 let pliki = [];
 let uzywane_pliki = [];
 let plik = ""
-
-console.log("Starting http server at *:3000")
+let port = 80
+console.log("Starting http server at *:" + port)
 http.createServer(function (req, res) {
   if (req.method === "GET") {
     res.writeHead(200, {
@@ -59,4 +59,4 @@ http.createServer(function (req, res) {
       res.end("e");
     });
   }
-}).listen(80);
+}).listen(port);

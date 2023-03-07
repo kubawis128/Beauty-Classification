@@ -32,12 +32,13 @@
         }
 
         function enable() {
-            for (const card of document.querySelectorAll("#card")) {
+            for (const card of document.querySelectorAll(".card")) {
                 card.onmousemove = e => handleOnMouseMove(e);
             }
         }
     </script>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
         body {
             align-items: center;
             justify-content: center;
@@ -62,8 +63,9 @@
 
         h1 {
             color: rgb(240, 240, 240);
-            font-family: "Rubik", sans-serif;
-            font-weight: 400;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: xx-large;
             text-align: center;
         }
 
@@ -78,12 +80,13 @@
             margin-top: 2%;
         }
 
-        #card {
+        .card {
             /*background: radial-gradient(
                 800px circle at var(--mouse-x) var(--mouse-y),
                 rgba(255,255,255, 0.06),
                 transparent 40%
             );*/
+            
             background-color: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.04);
             height: 200px;
@@ -94,11 +97,11 @@
             box-shadow: 3px 3px 5px #1d2025;
         }
 
-        #card:hover::before {
+        .card:hover::before {
             opacity: 1;
         }
 
-        #card::before {
+        .card::before {
             border-radius: inherit;
             content: "";
             height: 100%;
@@ -116,7 +119,7 @@
         h4,
         span {
             color: rgb(240, 240, 240);
-            font-family: "Rubik", sans-serif;
+            font-family: 'Montserrat', sans-serif;
             font-weight: 400;
             margin: 0px;
             font-size: 1.1em;
@@ -128,59 +131,93 @@
             text-align: center;
         }
 
-        .card-red::before {
+        #card-red::before {
             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
                     rgba(255, 13, 13, 0.12),
                     transparent 40%);
         }
 
-        .card-orange::before {
+        #card-orange::before {
             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
                     rgba(255, 78, 17, 0.12),
                     transparent 40%);
         }
 
-        .card-dark-yellow::before {
+        #card-dark-yellow::before {
             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
                     rgba(255, 142, 21, 0.12),
                     transparent 40%);
         }
 
-        .card-yellow::before {
+        #card-yellow::before {
             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
                     rgba(250, 183, 51, 0.12),
                     transparent 40%);
         }
 
-        .card-green::before {
+        #card-green::before {
             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
                     rgba(105, 179, 76, 0.12),
                     transparent 40%);
+        }
+        footer {
+            text-align: center;
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            background-color: #21262c;
+            box-shadow: 0px -10px 10px #21262c;
+            color:rgba(255, 255, 255, 0.75);
+        }
+        a:link {
+            color: rgba(255, 255, 255, 0.6);
+            background-color: transparent;
+            text-decoration: underline;
+        }
+
+        a:visited {
+            color: rgba(255, 255, 255, 0.4);
+            background-color: transparent;
+            text-decoration: none;
+        }
+
+        a:hover {
+            color: rgba(255, 255, 255, 0.9);
+            background-color: rgba(255, 255, 255, 0.05);
+            text-decoration: underline;
+        }
+
+        a:active {
+            color: rgba(255, 255, 255, 0.9);
+            background-color: transparent;
+            text-decoration: underline;
         }
     </style>
 </head>
 
 <body onload="enable();">
-    <h1>Oceń tą Morde</h1>
+    <h1>Oceń tą twarz</h1>
     <img height="512" width="512" class="nazwapliku" src="https://thispersondoesnotexist.com/image"></img>
     <div id="cards">
-        <div id="card" class="card-red" onclick="post(1)">
+        <div class="card" id="card-red" onclick="post(1)">
             <h2>1</h2>
         </div>
-        <div id="card" class="card-orange" onclick="post(2)">
+        <div class="card" id="card-orange" onclick="post(2)">
             <h2>2</h2>
         </div>
-        <div id="card" class="card-dark-yellow" onclick="post(3)">
+        <div class="card" id="card-dark-yellow" onclick="post(3)">
             <h2>3</h2>
         </div>
-        <div id="card" class="card-yellow" onclick="post(4)">
+        <div class="card" id="card-yellow" onclick="post(4)">
             <h2>4</h2>
         </div>
-        <div id="card" class="card-green" onclick="post(5)">
+        <div class="card" id="card-green" onclick="post(5)">
             <h2>5</h2>
         </div>
     </div>
-
+    <footer>
+        <p>Wszystkie zdjęcia pochodzą ze zbioru danych <a href="https://github.com/NVlabs/ffhq-dataset">Flickr-Faces-HQ Dataset</a> pod licencjami: CC BY 2.0, CC BY-NC 2.0, CC0 1.0, PDM 1.0,  U.S. Government Works. <br> Autorzy: <a href="https://discordapp.com/users/745026740547616778">Kacper#2571</a> <a href="https://discordapp.com/users/696765987034234880">Kejmilek#3623</a> <a href="https://discordapp.com/users/547075900139896834">KubaWis#7288</a> <a href="https://discordapp.com/users/696767232877002814">Tomilek#4990</a> <a href="https://discordapp.com/users/437711445539553280">Wer#0542</a></p>
+    </footer>
 </body>
 
 </html>
