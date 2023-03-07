@@ -5,6 +5,8 @@ let pliki = [];
 let uzywane_pliki = [];
 let plik = ""
 let port = 80
+let allPhotosCount = fs.readdirSync('./images/').length
+let donePhotosCount = 0
 console.log("Starting http server at *:" + port)
 http.createServer(function (req, res) {
   if (req.method === "GET") {
@@ -39,8 +41,13 @@ http.createServer(function (req, res) {
     try {
       let base64img = Buffer.from(fs.readFileSync("./images/" + plik)).toString('base64');
       let ress = "" + fs.readFileSync("./websites/index.html");
+      ress = ress.replace('ileprocent', ((donePhotosCount/allPhotosCount)*100).toFixed(2) + "%")
+      ress = ress.replace('ileprocent', ((donePhotosCount/allPhotosCount)*100).toFixed(2) + "%")
       ress = ress.replace('https://thispersondoesnotexist.com/image',"data:image/png;base64," + base64img )
       ress = ress.replace('nazwapliku',plik)
+      console.log("All photos:", allPhotosCount)
+      console.log("Done donePhotosCount:", donePhotosCount)
+      console.log("percent:", ((donePhotosCount/allPhotosCount)*100).toFixed(2))
       res.end(ress);
     } catch (error) {
       let ress = "" + fs.readFileSync("./websites/end_of_images.html");
@@ -56,6 +63,7 @@ http.createServer(function (req, res) {
       fs.rename("./images/" + src, "./out/" + rate +  "/" + plik, function (err) {
         if (err) console.log(err + "");
       })
+      donePhotosCount += 1
       res.end("e");
     });
   }

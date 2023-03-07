@@ -37,6 +37,7 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@900&display=swap');
         body {
@@ -115,8 +116,6 @@
         }
 
         h2,
-        h3,
-        h4,
         span {
             color: rgb(240, 240, 240);
             font-family: 'Montserrat', sans-serif;
@@ -130,7 +129,17 @@
             line-height: 200px;
             text-align: center;
         }
-
+        h3{
+            color: rgb(240, 240, 240);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 400;
+            margin: 0px;
+            font-size: 1.1em;
+            text-align: center;
+            margin: auto;
+            margin-top: auto;
+            text-align: center;
+        }
         #card-red::before {
             background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
                     rgba(255, 13, 13, 0.12),
@@ -192,11 +201,25 @@
             background-color: transparent;
             text-decoration: underline;
         }
+        .spacer {
+            min-height: 30px;
+        }
+        .smol {
+            margin-left: calc(25% / 2);
+            width: 75%;
+        }
+        .bar {
+            background-color:rgba(105, 179, 76, .9);
+        }
     </style>
 </head>
 
 <body onload="enable();">
     <h1>Oceń tą twarz</h1>
+    <h3>Ocenionych zdjęć</h3>
+    <div class="w3-light-grey w3-round-xlarge smol">
+        <div class="w3-container w3-round-xlarge bar" style="width:ileprocent">ileprocent</div>
+    </div>
     <img height="512" width="512" class="nazwapliku" src="https://thispersondoesnotexist.com/image"></img>
     <div id="cards">
         <div class="card" id="card-red" onclick="post(1)">
