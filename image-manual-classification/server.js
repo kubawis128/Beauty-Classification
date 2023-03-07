@@ -1,5 +1,7 @@
 var http = require('http');
 var fs = require('fs');
+const { Webhook, MessageBuilder } = require('discord-webhook-node');
+const hook = new Webhook("Webhook url here");
 
 let pliki = [];
 let uzywane_pliki = [];
@@ -7,6 +9,7 @@ let plik = ""
 let port = 80
 let allPhotosCount = fs.readdirSync('./images/').length
 let donePhotosCount = 0
+
 console.log("Starting http server at *:" + port)
 http.createServer(function (req, res) {
   if (req.method === "GET") {
@@ -52,18 +55,48 @@ http.createServer(function (req, res) {
     } catch (error) {
       let ress = "" + fs.readFileSync("./websites/end_of_images.html");
       res.end(ress);
+      try {
+        const embed = new MessageBuilder()
+        .setTitle('End reached!!!')
+        .setAuthor('Beauty Classification Status', 'https://cdn.discordapp.com/embed/avatars/0.png', 'http://socool.ddns.net')
+        .setDescription("Niewolnicy skończyli prace :D")
+        .setColor('#77dd77')
+        .setFooter('Pozdrawiam Wiśnia', 'https://cdn.discordapp.com/avatars/547075900139896834/9f6d9f8aaa9710f49d4598957568d4b0.webp')
+        .setTimestamp();
+        
+        hook.send(embed);
+      }catch (err) {
+        console.warn("Failed to send webhook")
+      }
+
       return
     }
     
   } else if (req.method === "POST") {
     req.on('data', chunk => {
+      donePhotosCount += 1
+      try{
+        if(donePhotosCount % 10 == 0){
+          const embed = new MessageBuilder()
+            .setTitle('Milestone reached')
+            .setAuthor('Beauty Classification Status', 'https://cdn.discordapp.com/embed/avatars/0.png', 'http://socool.ddns.net')
+            .setDescription(donePhotosCount + "/" + allPhotosCount + " " + ((donePhotosCount/allPhotosCount)*100).toFixed(2) + "%")
+            .setColor('#00b0f4')
+            .setFooter('Pozdrawiam Wiśnia', 'https://cdn.discordapp.com/avatars/547075900139896834/9f6d9f8aaa9710f49d4598957568d4b0.webp')
+            .setTimestamp();
+  
+            hook.send(embed);
+        }
+      }catch (err) {
+        console.warn("Failed to send webhook")
+      }
       chunk = chunk + ''
       let rate = chunk.split(",")[0]
       let src = chunk.split(",")[1]
       fs.rename("./images/" + src, "./out/" + rate +  "/" + plik, function (err) {
         if (err) console.log(err + "");
       })
-      donePhotosCount += 1
+
       res.end("e");
     });
   }

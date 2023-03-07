@@ -5,6 +5,9 @@
     "author": "Jakub Wiśniewski <kubawis128@github.com>",
     "main": "server.js",
     "scripts": {
-      "start": "node server.js"
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "discord-webhook-node": "^1.1.8"
     }
-  }
+}
