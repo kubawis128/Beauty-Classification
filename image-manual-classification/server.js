@@ -1,12 +1,12 @@
 var http = require('http');
 var fs = require('fs');
 const { Webhook, MessageBuilder } = require('discord-webhook-node');
-const hook = new Webhook("https://discord.com/api/webhooks/1082767830589644912/0pxjMWD3MvJzsuIN5KhSP42wfo6C3aoASBif5DBGOx1U8NvnWh2zz2r6O8g8zSinX3hJ");
+const hook = new Webhook("yes");
 
 let pliki = [];
 let uzywane_pliki = [];
 let plik = ""
-let port = 81
+let port = 80
 let allPhotosCount = fs.readdirSync('./images/').length
 let donePhotosCount = 0
 
@@ -83,6 +83,11 @@ http.createServer(function (req, res) {
             .setAuthor('Beauty Classification Status', 'https://cdn.discordapp.com/embed/avatars/0.png', 'http://socool.ddns.net')
             .addField("Ilość zdjęć",donePhotosCount + "/" + allPhotosCount)
             .addField("Percent done", " " + ((donePhotosCount/allPhotosCount)*100).toFixed(2) + "%")
+            .addField("Ilosc 1", fs.readdirSync('./out/1/').length)
+            .addField("Ilosc 2", fs.readdirSync('./out/2/').length)
+            .addField("Ilosc 3", fs.readdirSync('./out/3/').length)
+            .addField("Ilosc 4", fs.readdirSync('./out/4/').length)
+            .addField("Ilosc 5", fs.readdirSync('./out/5/').length)
             .setColor('#00b0f4')
             .setFooter('Pozdrawiam Wiśnia', 'https://cdn.discordapp.com/avatars/547075900139896834/9f6d9f8aaa9710f49d4598957568d4b0.webp')
             .setTimestamp();

@@ -6,10 +6,12 @@ from tensorflow.keras.losses import categorical_crossentropy
 from tensorflow.keras.optimizers import Adam, RMSprop
 import tensorflow.keras as keras
 import cv2
+import socket
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-model = keras.models.load_model('./models/test1')
+model = keras.models.load_model('./models/model-1000-wisnia-e')
+#model.load_weights("./models/checkpoints1/")
 class_names = ['1', '2', '3', '4', '5']
 
 def predict(image, cropped_image,index):
@@ -18,7 +20,8 @@ def predict(image, cropped_image,index):
     img_array = tf.expand_dims(img_array, 0) # Create a batch
     predictions = model.predict(img_array)
     score = tf.nn.softmax(predictions[0])
-    cv2.putText(image_copy, "{} with a {:.2f}%".format(class_names[np.argmax(score)], 100 * np.max(score)), (10,450), font, 3, (0, 255, 0), 2, cv2.LINE_AA)
-    cv2.putText(cropped_image, "{}".format(class_names[np.argmax(score)]), (0,25), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
-    cv2.imshow("cropped {}".format(index), cropped_image)
+    #cv2.putText(image_copy, "{} with a {:.2f}%".format(class_names[np.argmax(score)], 100 * np.max(score)), (10,450), font, 3, (0, 255, 0), 2, cv2.LINE_AA)
+    #cv2.putText(cropped_image, "{}".format(class_names[np.argmax(score)]), (0,25), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
+    #cv2.imshow("cropped {}".format(index), cropped_image)
     #cv2.imshow("prediction {}".format(index), image_copy)
+    return class_names[np.argmax(score)]

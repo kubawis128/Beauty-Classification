@@ -3,4 +3,4 @@ beauty-classificaion-model/dataset/
 beauty-classificaion-model/test/
 beauty-classificaion-model/__pycache__/
 beauty-classificaion-model/models/
-face-detection/images/
+face-detection/images/*
