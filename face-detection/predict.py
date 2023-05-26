@@ -24,4 +24,6 @@ def predict(image, cropped_image,index):
     #cv2.putText(cropped_image, "{}".format(class_names[np.argmax(score)]), (0,25), font, 1, (0, 255, 0), 2, cv2.LINE_AA)
     #cv2.imshow("cropped {}".format(index), cropped_image)
     #cv2.imshow("prediction {}".format(index), image_copy)
-    return class_names[np.argmax(score)]
+    
+    #return "5"
+    return class_names[np.argmax(score)] + "\n" + "{:.2f}%".format(100 * np.max(score))
